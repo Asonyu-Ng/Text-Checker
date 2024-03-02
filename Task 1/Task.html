@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Analyzer</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+    }
+    .container {
+        text-align: center;
+    }
+    input[type="text"] {
+        padding: 10px;
+        margin-bottom: 10px;
+        width: 300px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    #results {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Text Analyzer</h2>
+    <input type="text" id="textInput" placeholder="Enter text here">
+    <button onclick="analyzeText()">Analyze</button>
+    <div id="results"></div>
+</div>
+
+<script>
+    function analyzeText() {
+        var text = document.getElementById("textInput").value;
+        var wordCount = text.trim().split(/\s+/).length;
+        var characterCount = text.replace(/[^\w\s]/gi, "").length - (wordCount - 1);
+        var averageWordLength = characterCount / wordCount;
+        var spaceCount = text.split(" ").length - 1;
+        var vowelCount = text.match(/[aeiou]/gi) ? text.match(/[aeiou]/gi).length : 0;
+        var symbolCount = text.length;
+
+        var results = `
+            <p>Word Count: ${wordCount}</p>
+            <p>Character Count: ${characterCount}</p>
+            <p>Average Word Length: ${averageWordLength.toFixed(2)}</p>
+            <p>Number of Spaces: ${spaceCount}</p>
+            <p>Vowel Count: ${vowelCount}</p>
+            <p>Symbol Count: ${symbolCount}</p>
+        `;
+
+        document.getElementById("results").innerHTML = results;
+    }
+</script>
+</body>
+</html>
